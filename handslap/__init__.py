@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request
+from flask import Flask, render_template, request
 
 
 def create_app(test_config=None):
@@ -13,7 +13,8 @@ def create_app(test_config=None):
 
     @app.route('/')
     def index():
-        return f'This is {request.url_root} '
+        return render_template('index.html', url=request.url_root, client_ip=request.remote_addr)
+        # return f'This is {request.url_root} '
 
 
     return app
