@@ -25,7 +25,7 @@ def create_app(test_config=None):
             (request.url_root,)
         ) # I should validate url_root really
 
-        site_hits = result.fetchone()['hits']
+        site_hits = result.fetchone()
         if site_hits is None:
             site_hits = 0
             db.execute(
@@ -33,6 +33,8 @@ def create_app(test_config=None):
                 (request.url_root, site_hits)
             )
             db.commit()
+        else:
+            site_hits = site_hits['hits']
 
         site_hits = site_hits + 1
 
